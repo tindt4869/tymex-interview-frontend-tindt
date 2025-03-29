@@ -1,19 +1,29 @@
-import { Author } from "./author";
+import { IAuthor } from "./author";
 
-export type Category = string;
+export type Category =
+  | "Upper Body"
+  | "Lower Body"
+  | "Hat"
+  | "Shoes"
+  | "Accessory"
+  | "Legendary"
+  | "Mythic"
+  | "Epic"
+  | "Rare";
 
-export type Theme = string;
+export type Theme = "All" | "Dark" | "Light" | "Colorful" | "Halloween";
 
-export type Tier = string;
+export type Tier = "All" | "Basic" | "Premium" | "Deluxe";
 
-export interface Product {
+export interface IProduct {
   id: number;
   title: string;
   category: Category;
   price: number;
   isFavorite: boolean;
+  createdAt: number;
   theme: Theme;
   tier: Tier;
   imageId: number;
-  author: Author;
+  author: IAuthor;
 }

@@ -1,12 +1,8 @@
-export type Gender = "Male" | "Female" | "Other";
-
-export type OnlineStatus = "idle" | "offline" | "online";
-
-export interface Author {
+export interface IAuthor {
   firstName: string;
   lastName: string;
   email: string;
-  gender: Gender;
+  gender: string;
   avatar: string;
-  onlineStatus: OnlineStatus;
+  onlineStatus: string;
 }
