@@ -15,12 +15,17 @@ const useStyles = createStyles(() => ({
   marketplace: {
     marginTop: 64,
   },
+  productListContainer: {
+    maxHeight: "100vh",
+    overflow: "auto",
+    paddingRight: 10,
+  },
 }));
 
 const Marketplace: React.FC = () => {
   const search = useSearch({ from: "/" }) as IFilters;
   const navigate = useNavigate({ from: "/" });
-  const { styles } = useStyles();
+  const { styles, cx } = useStyles();
 
   const {
     data,
@@ -56,15 +61,17 @@ const Marketplace: React.FC = () => {
             <ProductListError message={error.message} />
           ) : (
             <>
-              <Space direction="vertical" size={16}>
-                {data?.pages.map((page) => {
-                  return (
-                    <React.Fragment key={page.nextPage}>
-                      <ProductList products={page.data || []} />
-                    </React.Fragment>
-                  );
-                })}
-              </Space>
+              <div className={cx(styles.productListContainer, "scroller")}>
+                <Space direction="vertical" size={16}>
+                  {data?.pages.map((page) => {
+                    return (
+                      <React.Fragment key={page.nextPage}>
+                        <ProductList products={page.data || []} />
+                      </React.Fragment>
+                    );
+                  })}
+                </Space>
+              </div>
               <Flex justify="center" style={{ marginTop: 32 }}>
                 <Button
                   loading={isFetchingNextPage}
