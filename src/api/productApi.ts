@@ -2,12 +2,16 @@ import axios from "axios";
 import { IProduct, IFilters } from "../types";
 import { DEFAULT_LIMIT } from "../constants/paginate";
 
+const sleep = (ms = 0) => new Promise((resolve) => setTimeout(resolve, ms));
+
 const apiClient = axios.create({
   baseURL: "http://localhost:5005",
   timeout: 5000,
 });
 
-export const fetchProducts = async (filters: IFilters): Promise<IProduct[]> => {
+export const fetchProducts = async (
+  filters: IFilters
+): Promise<{ nextPage: number | null; data: IProduct[] }> => {
   try {
     const params: Record<string, string | number> = {};
     if (filters.query) {
@@ -38,7 +42,15 @@ export const fetchProducts = async (filters: IFilters): Promise<IProduct[]> => {
     params._limit = filters.limit || DEFAULT_LIMIT;
 
     const response = await apiClient.get<IProduct[]>("/products", { params });
-    return response.data;
+    const total = response.headers["x-total-count"];
+    const currPage = filters.page || 0;
+    const currCount = (currPage + 1) * (filters.limit || DEFAULT_LIMIT);
+    const nextPage = currCount > total ? null : currPage + 1;
+    await sleep(5000);
+    return {
+      data: response.data,
+      nextPage,
+    };
   } catch (error) {
     throw error;
   }

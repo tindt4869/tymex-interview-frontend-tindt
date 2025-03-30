@@ -20,6 +20,8 @@ export const theme: ThemeConfig = {
       paddingContentVertical: 10,
       controlHeight: 44,
       borderRadius: 4,
+      colorTextDisabled: "#d9d9d9",
+      colorBgContainerDisabled: "#d872a5",
     },
     Card: {
       borderRadius: 10,
