@@ -7,6 +7,7 @@ import Filters from "../components/Filters";
 import ProductList from "../components/ProductList";
 import ProductListError from "../components/ProductListError";
 import ProductListPending from "../components/ProductListPending";
+import { refetchIntervalMs } from "../constants/product";
 import { IFilters } from "../types";
 
 const Marketplace: React.FC = () => {
@@ -25,6 +26,7 @@ const Marketplace: React.FC = () => {
     queryFn: ({ pageParam }) => fetchProducts({ ...search, page: pageParam }),
     initialPageParam: 0,
     getNextPageParam: (lastPage) => lastPage.nextPage,
+    refetchInterval: refetchIntervalMs,
   });
 
   const handleFilterChange = (filters: IFilters) => {
