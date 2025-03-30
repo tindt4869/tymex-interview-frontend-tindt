@@ -2,8 +2,6 @@ import axios from "axios";
 import { IProduct, IFilters } from "../types";
 import { DEFAULT_LIMIT } from "../constants/paginate";
 
-const sleep = (ms = 0) => new Promise((resolve) => setTimeout(resolve, ms));
-
 const apiClient = axios.create({
   baseURL: "http://localhost:5005",
   timeout: 5000,
@@ -46,7 +44,6 @@ export const fetchProducts = async (
     const currPage = filters.page || 0;
     const currCount = (currPage + 1) * (filters.limit || DEFAULT_LIMIT);
     const nextPage = currCount > total ? null : currPage + 1;
-    await sleep(5000);
     return {
       data: response.data,
       nextPage,
