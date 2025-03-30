@@ -12,6 +12,7 @@ import DownIcon from "../assets/icons/down.svg?react";
 import { IFilters } from "../types";
 import { createStyles } from "antd-style";
 import SearchInput from "./SearchInput";
+import { DEFAULT_FILTERS } from "../constants/filters";
 
 const useStyles = createStyles(() => ({
   select: {
@@ -72,6 +73,14 @@ const FiltersComponent: React.FC<FiltersProps> = ({ onFilterChange }) => {
     };
     onFilterChange(filters);
   }, [priceRange, theme, tier, time, price, query, onFilterChange]);
+
+  const handleReset = () => {
+    setTheme(DEFAULT_FILTERS.theme);
+    setTier(DEFAULT_FILTERS.tier);
+    setPrice(DEFAULT_FILTERS.price);
+    setPriceRange([DEFAULT_FILTERS.minPrice, DEFAULT_FILTERS.maxPrice]);
+    setQuery(DEFAULT_FILTERS.query);
+  };
 
   return (
     <div className="filters">
@@ -158,11 +167,7 @@ const FiltersComponent: React.FC<FiltersProps> = ({ onFilterChange }) => {
       <Button
         className={styles.filterSubmitButton}
         type="primary"
-        onClick={() => {
-          setPriceRange([0.01, 200]);
-          setTheme("All");
-          setTier("All");
-        }}
+        onClick={handleReset}
       >
         Reset Filter
       </Button>

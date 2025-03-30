@@ -27,6 +27,12 @@ const SearchInput: React.FC<SearchInputProps> = ({
   );
 
   useEffect(() => {
+    if (value === "") {
+      setSearchTerm(value);
+    }
+  }, [value]);
+
+  useEffect(() => {
     return () => {
       debouncedSearch.cancel();
     };
