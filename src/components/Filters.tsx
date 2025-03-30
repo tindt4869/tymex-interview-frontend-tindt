@@ -9,9 +9,9 @@ import {
 } from "../constants/product";
 import Icon from "@ant-design/icons";
 import DownIcon from "../assets/icons/down.svg?react";
-import SearchIcon from "../assets/icons/search.svg?react";
 import { IFilters } from "../types";
 import { createStyles } from "antd-style";
+import SearchInput from "./SearchInput";
 
 const useStyles = createStyles(() => ({
   select: {
@@ -75,11 +75,7 @@ const FiltersComponent: React.FC<FiltersProps> = ({ onFilterChange }) => {
 
   return (
     <div className="filters">
-      <Input
-        placeholder="Quick search"
-        prefix={<Icon component={SearchIcon} />}
-        onChange={(event) => setQuery(event.target.value)}
-      />
+      <SearchInput value={query} onSearch={(value) => setQuery(value)} />
 
       <div className={styles.filterItem}>
         <label>Price</label>
