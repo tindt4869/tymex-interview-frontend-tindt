@@ -1,4 +1,4 @@
-import { ThemeConfig } from "antd";
+import { ThemeConfig } from "antd"
 
 export const theme: ThemeConfig = {
   token: {
@@ -36,4 +36,4 @@ export const theme: ThemeConfig = {
       colorBorder: "#3A3841",
     },
   },
-};
+}

@@ -1,4 +1,4 @@
-import { IAuthor } from "./author";
+import { IAuthor } from "./author"
 
 export type Category =
   | "Upper Body"
@@ -9,21 +9,21 @@ export type Category =
   | "Legendary"
   | "Mythic"
   | "Epic"
-  | "Rare";
+  | "Rare"
 
-export type Theme = "All" | "Dark" | "Light" | "Colorful" | "Halloween";
+export type Theme = "All" | "Dark" | "Light" | "Colorful" | "Halloween"
 
-export type Tier = "All" | "Basic" | "Premium" | "Deluxe";
+export type Tier = "All" | "Basic" | "Premium" | "Deluxe"
 
 export interface IProduct {
-  id: number;
-  title: string;
-  category: Category;
-  price: number;
-  isFavorite: boolean;
-  createdAt: number;
-  theme: Theme;
-  tier: Tier;
-  imageId: number;
-  author: IAuthor;
+  id: number
+  title: string
+  category: Category
+  price: number
+  isFavorite: boolean
+  createdAt: number
+  theme: Theme
+  tier: Tier
+  imageId: number
+  author: IAuthor
 }

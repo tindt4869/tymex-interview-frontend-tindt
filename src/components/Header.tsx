@@ -1,9 +1,9 @@
-import React, { useState } from "react";
-import { Button, Drawer, Menu, Space, Dropdown } from "antd";
-import Icon, { MenuOutlined } from "@ant-design/icons";
-import { createStyles } from "antd-style";
-import WorldIcon from "../assets/icons/world.svg?react";
-import DownIcon from "../assets/icons/down.svg?react";
+import React, { useState } from "react"
+import { Button, Drawer, Menu, Space, Dropdown } from "antd"
+import Icon, { MenuOutlined } from "@ant-design/icons"
+import { createStyles } from "antd-style"
+import WorldIcon from "../assets/icons/world.svg?react"
+import DownIcon from "../assets/icons/down.svg?react"
 
 const useStyles = createStyles(({ css }) => ({
   nav: css`
@@ -141,7 +141,7 @@ const useStyles = createStyles(({ css }) => ({
       },
     },
   },
-}));
+}))
 
 const navigationItems = [
   { key: "home", label: "Home" },
@@ -150,18 +150,18 @@ const navigationItems = [
   { key: "marketplace", label: "Marketplace" },
   { key: "roadmap", label: "Roadmap" },
   { key: "whitepaper", label: "Whitepaper" },
-];
+]
 
 const languageOptions = [
   { key: "en", label: "English" },
   { key: "vi", label: "Tiếng Việt" },
   { key: "kr", label: "한국어" },
-];
+]
 
 const Header: React.FC = () => {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [selectedLanguage, setSelectedLanguage] = useState("EN");
-  const { styles } = useStyles();
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [selectedLanguage, setSelectedLanguage] = useState("EN")
+  const { styles } = useStyles()
 
   const languageMenu = {
     items: languageOptions.map((lang) => ({
@@ -169,32 +169,29 @@ const Header: React.FC = () => {
       label: lang.label,
     })),
     onClick: ({ key }: { key: string }) => {
-      setSelectedLanguage(key.toUpperCase());
+      setSelectedLanguage(key.toUpperCase())
     },
-  };
+  }
 
   return (
     <nav className={styles.nav}>
-      <div className="nav-content">
+      <div className='nav-content'>
         {/* <div style={{ width: 40, height: 40, background: "#fff" }} /> */}
 
-        <div className="nav-links">
+        <div className='nav-links'>
           {navigationItems.map((item) => (
-            <span
-              key={item.key}
-              className={`nav-link ${item.key === "marketplace" ? "active" : ""}`}
-            >
+            <span key={item.key} className={`nav-link ${item.key === "marketplace" ? "active" : ""}`}>
               {item.label}
             </span>
           ))}
         </div>
 
         <Space className={styles.navRight} size={24}>
-          <Button type="primary" className="connect-wallet">
+          <Button type='primary' className='connect-wallet'>
             Connect Wallet
           </Button>
 
-          <Dropdown menu={languageMenu} placement="bottom">
+          <Dropdown menu={languageMenu} placement='bottom'>
             <div className={styles.languageSelector}>
               <Icon style={{ fontSize: 24 }} component={WorldIcon} />
               <Icon component={DownIcon} />
@@ -202,8 +199,8 @@ const Header: React.FC = () => {
           </Dropdown>
 
           <Button
-            className="mobile-menu"
-            type="text"
+            className='mobile-menu'
+            type='text'
             icon={<MenuOutlined style={{ color: "white", fontSize: 24 }} />}
             onClick={() => setMobileMenuOpen(true)}
           />
@@ -211,14 +208,14 @@ const Header: React.FC = () => {
       </div>
       <Drawer
         className={styles.drawer}
-        title="Menu"
-        placement="right"
+        title='Menu'
+        placement='right'
         onClose={() => setMobileMenuOpen(false)}
         open={mobileMenuOpen}
         width={300}
       >
         <Menu
-          mode="vertical"
+          mode='vertical'
           selectedKeys={["marketplace"]}
           items={navigationItems.map((item) => ({
             key: item.key,
@@ -227,7 +224,7 @@ const Header: React.FC = () => {
         />
       </Drawer>
     </nav>
-  );
-};
+  )
+}
 
-export default Header;
+export default Header

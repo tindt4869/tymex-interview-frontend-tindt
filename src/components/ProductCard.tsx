@@ -1,11 +1,11 @@
-import { Card } from "antd";
-import CardCover from "./CardCover";
-import { IProduct } from "../types";
-import { createStyles } from "antd-style";
-import CardCategory from "./CardCategory";
-import CardFavorite from "./CardFavorite";
-import CardAuthor from "./CardAuthor";
-import ProductPrice from "./ProductPrice";
+import { Card } from "antd"
+import CardCover from "./CardCover"
+import { IProduct } from "../types"
+import { createStyles } from "antd-style"
+import CardCategory from "./CardCategory"
+import CardFavorite from "./CardFavorite"
+import CardAuthor from "./CardAuthor"
+import ProductPrice from "./ProductPrice"
 
 const useStyles = createStyles(() => ({
   cardCoverInner: {
@@ -35,17 +35,17 @@ const useStyles = createStyles(() => ({
       whiteSpace: "nowrap",
     },
   },
-}));
+}))
 
 interface ProductCardProps {
-  product: IProduct;
+  product: IProduct
 }
 
 const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
-  const { styles } = useStyles();
+  const { styles } = useStyles()
   return (
     <Card
-      variant="borderless"
+      variant='borderless'
       hoverable
       cover={
         <CardCover alt={product.title} src={`./images/${product.imageId}.png`}>
@@ -64,7 +64,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
 
       <CardAuthor author={product.author} />
     </Card>
-  );
-};
+  )
+}
 
-export default ProductCard;
+export default ProductCard

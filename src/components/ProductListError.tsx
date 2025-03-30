@@ -1,7 +1,7 @@
-import { Typography } from "antd";
-import { createStyles } from "antd-style";
+import { Typography } from "antd"
+import { createStyles } from "antd-style"
 
-const { Text } = Typography;
+const { Text } = Typography
 
 const useStyles = createStyles(() => ({
   container: {
@@ -9,20 +9,20 @@ const useStyles = createStyles(() => ({
     flexDirection: "column",
     alignItems: "center",
   },
-}));
+}))
 
 interface Props {
-  message: string;
+  message: string
 }
 
 const ProductListError: React.FC<Props> = ({ message }) => {
-  const { styles } = useStyles();
+  const { styles } = useStyles()
   return (
     <div className={styles.container}>
       <Text>Oops! Something went wrong. Please try again later.</Text>
-      <Text type="danger">{message}</Text>
+      <Text type='danger'>{message}</Text>
     </div>
-  );
-};
+  )
+}
 
-export default ProductListError;
+export default ProductListError

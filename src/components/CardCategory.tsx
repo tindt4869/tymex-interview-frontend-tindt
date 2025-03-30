@@ -1,6 +1,6 @@
-import React from "react";
-import { createStyles } from "antd-style";
-import { colors } from "../theme/colors";
+import React from "react"
+import { createStyles } from "antd-style"
+import { colors } from "../theme/colors"
 
 const useStyles = createStyles(() => ({
   container: {
@@ -9,16 +9,16 @@ const useStyles = createStyles(() => ({
     padding: "0.25rem 0.75rem",
     fontSize: 12,
   },
-}));
+}))
 
 interface Props {
-  category: string;
+  category: string
 }
 
 const CardCategory: React.FC<Props> = ({ category }) => {
-  const { styles } = useStyles();
+  const { styles } = useStyles()
 
-  return <div className={styles.container}>{category}</div>;
-};
+  return <div className={styles.container}>{category}</div>
+}
 
-export default CardCategory;
+export default CardCategory

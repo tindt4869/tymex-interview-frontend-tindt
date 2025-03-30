@@ -1,16 +1,16 @@
-import React from "react";
-import { useInfiniteQuery } from "@tanstack/react-query";
-import { useSearch, useNavigate } from "@tanstack/react-router";
-import { fetchProducts } from "../api/productApi";
-import { Row, Col, Button, Space, Flex } from "antd";
-import Filters from "../components/Filters";
-import ProductList from "../components/ProductList";
-import ProductListError from "../components/ProductListError";
-import ProductListPending from "../components/ProductListPending";
-import { refetchIntervalMs } from "../constants/product";
-import { IFilters } from "../types";
-import { createStyles } from "antd-style";
-import ProductListEmpty from "../components/ProductListEmpty";
+import React from "react"
+import { useInfiniteQuery } from "@tanstack/react-query"
+import { useSearch, useNavigate } from "@tanstack/react-router"
+import { fetchProducts } from "../api/productApi"
+import { Row, Col, Button, Space, Flex } from "antd"
+import Filters from "../components/Filters"
+import ProductList from "../components/ProductList"
+import ProductListError from "../components/ProductListError"
+import ProductListPending from "../components/ProductListPending"
+import { refetchIntervalMs } from "../constants/product"
+import { IFilters } from "../types"
+import { createStyles } from "antd-style"
+import ProductListEmpty from "../components/ProductListEmpty"
 
 const useStyles = createStyles(() => ({
   marketplace: {
@@ -21,34 +21,27 @@ const useStyles = createStyles(() => ({
     overflow: "auto",
     paddingRight: 10,
   },
-}));
+}))
 
 const Marketplace: React.FC = () => {
-  const search = useSearch({ from: "/" }) as IFilters;
-  const navigate = useNavigate({ from: "/" });
-  const { styles, cx } = useStyles();
+  const search = useSearch({ from: "/" }) as IFilters
+  const navigate = useNavigate({ from: "/" })
+  const { styles, cx } = useStyles()
 
-  const {
-    data,
-    status,
-    error,
-    isFetchingNextPage,
-    fetchNextPage,
-    hasNextPage,
-  } = useInfiniteQuery({
+  const { data, status, error, isFetchingNextPage, fetchNextPage, hasNextPage } = useInfiniteQuery({
     queryKey: ["products", search],
     queryFn: ({ pageParam }) => fetchProducts({ ...search, page: pageParam }),
     initialPageParam: 0,
     getNextPageParam: (lastPage) => lastPage.nextPage,
     refetchInterval: refetchIntervalMs,
-  });
-  const noData = data?.pages[0].data.length === 0;
+  })
+  const noData = data?.pages[0].data.length === 0
 
   const handleFilterChange = (filters: IFilters) => {
     navigate({
       search: (prevFilters: IFilters) => ({ ...prevFilters, ...filters }),
-    });
-  };
+    })
+  }
 
   return (
     <div className={styles.marketplace}>
@@ -66,20 +59,20 @@ const Marketplace: React.FC = () => {
           ) : (
             <>
               <div className={cx(styles.productListContainer, "scroller")}>
-                <Space direction="vertical" size={16}>
+                <Space direction='vertical' size={16}>
                   {data?.pages.map((page) => {
                     return (
                       <React.Fragment key={page.nextPage}>
                         <ProductList products={page.data || []} />
                       </React.Fragment>
-                    );
+                    )
                   })}
                 </Space>
               </div>
-              <Flex justify="center" style={{ marginTop: 32 }}>
+              <Flex justify='center' style={{ marginTop: 32 }}>
                 <Button
                   loading={isFetchingNextPage}
-                  type="primary"
+                  type='primary'
                   onClick={() => fetchNextPage()}
                   disabled={!hasNextPage || isFetchingNextPage}
                   style={{ minWidth: 300 }}
@@ -92,7 +85,7 @@ const Marketplace: React.FC = () => {
         </Col>
       </Row>
     </div>
-  );
-};
+  )
+}
 
-export default Marketplace;
+export default Marketplace

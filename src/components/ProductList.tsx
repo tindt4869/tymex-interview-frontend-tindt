@@ -1,9 +1,9 @@
-import { Row, Col } from "antd";
-import ProductCard from "./ProductCard";
-import { IProduct } from "../types";
+import { Row, Col } from "antd"
+import ProductCard from "./ProductCard"
+import { IProduct } from "../types"
 
 interface ProductListProps {
-  products: IProduct[];
+  products: IProduct[]
 }
 
 const ProductList: React.FC<ProductListProps> = ({ products }) => {
@@ -15,7 +15,7 @@ const ProductList: React.FC<ProductListProps> = ({ products }) => {
         </Col>
       ))}
     </Row>
-  );
-};
+  )
+}
 
-export default ProductList;
+export default ProductList

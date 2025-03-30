@@ -1,6 +1,6 @@
-import React, { PropsWithChildren } from "react";
-import { getRandomBgColor } from "../theme/gradient";
-import { createStyles } from "antd-style";
+import React, { PropsWithChildren } from "react"
+import { getRandomBgColor } from "../theme/gradient"
+import { createStyles } from "antd-style"
 
 const useStyles = createStyles(() => ({
   container: {
@@ -22,19 +22,15 @@ const useStyles = createStyles(() => ({
     marginTop: 36,
     width: "100%",
   },
-}));
+}))
 
 interface Props {
-  alt: string;
-  src: string;
+  alt: string
+  src: string
 }
 
-const CardCover: React.FC<PropsWithChildren<Props>> = ({
-  alt,
-  src,
-  children,
-}) => {
-  const { styles } = useStyles();
+const CardCover: React.FC<PropsWithChildren<Props>> = ({ alt, src, children }) => {
+  const { styles } = useStyles()
 
   return (
     <div className={styles.container}>
@@ -43,7 +39,7 @@ const CardCover: React.FC<PropsWithChildren<Props>> = ({
         <img className={styles.img} alt={alt} src={src} />
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default CardCover;
+export default CardCover

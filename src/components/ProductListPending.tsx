@@ -1,5 +1,5 @@
-import { Spin } from "antd";
-import { LoadingOutlined } from "@ant-design/icons";
+import { Spin } from "antd"
+import { LoadingOutlined } from "@ant-design/icons"
 
 const ProductListPending = () => {
   return (
@@ -10,9 +10,9 @@ const ProductListPending = () => {
         color: "white",
       }}
     >
-      <Spin size="large" indicator={<LoadingOutlined spin />} />
+      <Spin size='large' indicator={<LoadingOutlined spin />} />
     </div>
-  );
-};
+  )
+}
 
-export default ProductListPending;
+export default ProductListPending

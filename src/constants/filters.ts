@@ -1,4 +1,4 @@
-import { IFilters } from "../types";
+import { IFilters } from "../types"
 
 export const DEFAULT_FILTERS: Required<IFilters> = {
   query: "",
@@ -10,4 +10,4 @@ export const DEFAULT_FILTERS: Required<IFilters> = {
   tier: "All",
   page: 0,
   limit: 20,
-};
+}

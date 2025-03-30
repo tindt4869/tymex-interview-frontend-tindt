@@ -1,10 +1,10 @@
-import React from "react";
-import { Row, Col, Input, Button, Typography, Space, Divider } from "antd";
-import Icon from "@ant-design/icons";
-import { createStyles } from "antd-style";
-import MessageIcon from "../assets/icons/comment.svg?react";
-import PhoneIcon from "../assets/icons/phone.svg?react";
-import { colors } from "../theme/colors";
+import React from "react"
+import { Row, Col, Input, Button, Typography, Space, Divider } from "antd"
+import Icon from "@ant-design/icons"
+import { createStyles } from "antd-style"
+import MessageIcon from "../assets/icons/comment.svg?react"
+import PhoneIcon from "../assets/icons/phone.svg?react"
+import { colors } from "../theme/colors"
 
 const useStyles = createStyles(() => ({
   texture: {
@@ -79,9 +79,9 @@ const useStyles = createStyles(() => ({
       justifyContent: "flex-start",
     },
   },
-}));
+}))
 
-const { Title, Text, Link } = Typography;
+const { Title, Text, Link } = Typography
 
 const navigation = [
   { title: "Home", href: "#" },
@@ -93,16 +93,16 @@ const navigation = [
   { title: "Our teams", href: "#" },
   { title: "Roadmap", href: "#" },
   { title: "Community", href: "#" },
-];
+]
 
 const legalLinks = [
   { title: "Security", href: "#" },
   { title: "Legal", href: "#" },
   { title: "Privacy", href: "#" },
-];
+]
 
 const Footer: React.FC = () => {
-  const { styles } = useStyles();
+  const { styles } = useStyles()
 
   return (
     <>
@@ -147,20 +147,15 @@ const Footer: React.FC = () => {
                 Subcribe to receive our latest update
               </Title>
               <div className={styles.subscribe}>
-                <Input placeholder="Your email address" />
-                <Button type="primary">Subscribe</Button>
+                <Input placeholder='Your email address' />
+                <Button type='primary'>Subscribe</Button>
               </div>
             </Col>
           </Row>
 
           <Divider className={styles.divider} />
 
-          <Row
-            className={styles.copyRightSection}
-            justify="space-between"
-            align="middle"
-            gutter={[0, 16]}
-          >
+          <Row className={styles.copyRightSection} justify='space-between' align='middle' gutter={[0, 16]}>
             <Col xs={24} md={12}>
               <Text>©2023 Tyme - Edit. All Rights reserved.</Text>
             </Col>
@@ -179,7 +174,7 @@ const Footer: React.FC = () => {
         </div>
       </div>
     </>
-  );
-};
+  )
+}
 
-export default Footer;
+export default Footer

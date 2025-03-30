@@ -9,7 +9,7 @@ const Hero = () => {
         backgroundPosition: "center bottom",
       }}
     ></div>
-  );
-};
+  )
+}
 
-export default Hero;
+export default Hero
