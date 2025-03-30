@@ -3,16 +3,17 @@ import { fetchProducts } from '../productApi';
 import { IProduct, Theme, Tier } from '../../types';
 import { IFilters } from '../../types/filters';
 
+// Mock the environment variable
+vi.mock('../../constants/env', () => ({
+  API_URL: 'http://localhost:5005'
+}));
+
 const mockGet = vi.hoisted(() => vi.fn());
 
 vi.mock('axios', () => ({
   default: {
-    create: () => ({
-      get: mockGet,
-      defaults: {
-        baseURL: 'http://localhost:5005',
-        timeout: 5000
-      }
+    create: vi.fn().mockReturnValue({
+      get: mockGet
     })
   }
 }));

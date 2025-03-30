@@ -39,12 +39,18 @@ git clone https://github.com/tindt4869/tymex-interview-frontend-tindt.git
 cd tymex-interview-frontend-tindt
 ```
 
-2. Install dependencies:
+2. Set up environment variables:
+```bash
+cp .env.example .env
+```
+Then edit `.env` file with your configuration if needed.
+
+3. Install dependencies:
 ```bash
 npm install
 ```
 
-3. Start the development server:
+4. Start the development server:
 ```bash
 npm run dev
 ```

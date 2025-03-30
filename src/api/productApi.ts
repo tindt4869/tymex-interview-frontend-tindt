@@ -1,9 +1,10 @@
 import axios from "axios"
 import { IProduct, IFilters } from "../types"
 import { DEFAULT_LIMIT } from "../constants/paginate"
+import { API_URL } from "../constants/env"
 
 const apiClient = axios.create({
-  baseURL: "http://localhost:5005",
+  baseURL: API_URL,
   timeout: 5000,
 })
 
