@@ -9,10 +9,18 @@ import ProductListError from "../components/ProductListError";
 import ProductListPending from "../components/ProductListPending";
 import { refetchIntervalMs } from "../constants/product";
 import { IFilters } from "../types";
+import { createStyles } from "antd-style";
+
+const useStyles = createStyles(() => ({
+  marketplace: {
+    marginTop: 64,
+  },
+}));
 
 const Marketplace: React.FC = () => {
   const search = useSearch({ from: "/" }) as IFilters;
   const navigate = useNavigate({ from: "/" });
+  const { styles } = useStyles();
 
   const {
     data,
@@ -36,7 +44,7 @@ const Marketplace: React.FC = () => {
   };
 
   return (
-    <div className="marketplace">
+    <div className={styles.marketplace}>
       <Row gutter={[16, 16]}>
         <Col xs={24} md={6}>
           <Filters onFilterChange={handleFilterChange} />

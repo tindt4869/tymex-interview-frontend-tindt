@@ -83,7 +83,7 @@ const useStyles = createStyles(() => ({
 
 const { Title, Text, Link } = Typography;
 
-const navigation1 = [
+const navigation = [
   { title: "Home", href: "#" },
   { title: "Whitepaper", href: "#" },
   { title: "FAQs", href: "#" },
@@ -116,8 +116,8 @@ const Footer: React.FC = () => {
               </Title>
 
               <div className={styles.navigationColums}>
-                {navigation1.map((item) => (
-                  <div className={styles.navigationItem}>
+                {navigation.map((item) => (
+                  <div key={item.title} className={styles.navigationItem}>
                     <Link key={item.title} href={item.href}>
                       {item.title}
                     </Link>
@@ -126,7 +126,7 @@ const Footer: React.FC = () => {
               </div>
             </Col>
 
-            <Col xs={24} md={12} lg={6}>
+            <Col xs={24} md={12} lg={5}>
               <Title level={3} className={styles.sectionTitle}>
                 Contact us
               </Title>
@@ -142,7 +142,7 @@ const Footer: React.FC = () => {
               </div>
             </Col>
 
-            <Col xs={24} md={12} lg={8}>
+            <Col xs={24} md={12} lg={9}>
               <Title level={3} className={styles.sectionTitle}>
                 Subcribe to receive our latest update
               </Title>

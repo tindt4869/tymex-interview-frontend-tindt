@@ -29,5 +29,11 @@ export const theme: ThemeConfig = {
       colorText: "white",
       colorBgContainer: "rgba(49, 59, 69, 0.5)",
     },
+    Select: {
+      selectorBg: "transparent",
+      borderRadius: 4,
+      controlHeight: 44,
+      colorBorder: "#3A3841",
+    },
   },
 };
