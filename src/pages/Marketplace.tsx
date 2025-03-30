@@ -10,6 +10,7 @@ import ProductListPending from "../components/ProductListPending";
 import { refetchIntervalMs } from "../constants/product";
 import { IFilters } from "../types";
 import { createStyles } from "antd-style";
+import ProductListEmpty from "../components/ProductListEmpty";
 
 const useStyles = createStyles(() => ({
   marketplace: {
@@ -41,6 +42,7 @@ const Marketplace: React.FC = () => {
     getNextPageParam: (lastPage) => lastPage.nextPage,
     refetchInterval: refetchIntervalMs,
   });
+  const noData = data?.pages[0].data.length === 0;
 
   const handleFilterChange = (filters: IFilters) => {
     navigate({
@@ -59,6 +61,8 @@ const Marketplace: React.FC = () => {
             <ProductListPending />
           ) : status === "error" ? (
             <ProductListError message={error.message} />
+          ) : noData ? (
+            <ProductListEmpty />
           ) : (
             <>
               <div className={cx(styles.productListContainer, "scroller")}>
