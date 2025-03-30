@@ -19,6 +19,7 @@ export const theme: ThemeConfig = {
       paddingContentHorizontal: 16,
       paddingContentVertical: 10,
       controlHeight: 44,
+      borderRadius: 4,
     },
     Card: {
       borderRadius: 10,
