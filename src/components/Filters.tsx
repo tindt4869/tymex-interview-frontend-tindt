@@ -1,41 +1,88 @@
 import { useEffect, useState } from "react";
 import { useSearch } from "@tanstack/react-router";
-import { Slider, Select, Button } from "antd";
-import { ThemeOptions, TierOptions } from "../constants/product";
+import { Slider, Select, Button, SliderSingleProps, Input } from "antd";
+import {
+  PriceOptions,
+  ThemeOptions,
+  TierOptions,
+  TimeOptions,
+} from "../constants/product";
+import Icon from "@ant-design/icons";
+import DownIcon from "../assets/icons/down.svg?react";
+import SearchIcon from "../assets/icons/search.svg?react";
 import { IFilters } from "../types";
+import { createStyles } from "antd-style";
+
+const useStyles = createStyles(() => ({
+  select: {
+    width: "100%",
+    "& .ant-select-arrow": {
+      color: "white",
+    },
+  },
+  selectDropdown: {
+    backgroundColor: "transparent",
+  },
+  filterItem: {
+    marginTop: 24,
+  },
+  filterSubmitButton: {
+    marginTop: 24,
+  },
+  sliderHelperText: {
+    width: "100%",
+    display: "flex",
+    justifyContent: "space-between",
+    color: "#D6D6D6",
+  },
+}));
 
 const { Option } = Select;
+
+const formatter: NonNullable<SliderSingleProps["tooltip"]>["formatter"] = (
+  value
+) => `${value} ETH`;
 
 interface FiltersProps {
   onFilterChange: (filters: IFilters) => void;
 }
 
 const FiltersComponent: React.FC<FiltersProps> = ({ onFilterChange }) => {
+  const { styles } = useStyles();
   const search = useSearch({ from: "/" });
+  const [query, setQuery] = useState(search.query);
   const [priceRange, setPriceRange] = useState<[number, number]>([
     search.minPrice,
     search.maxPrice,
   ]);
   const [theme, setTheme] = useState(search.theme);
   const [tier, setTier] = useState(search.tier);
-
-  console.log(priceRange);
+  const [time, setTime] = useState(search.time);
+  const [price, setPrice] = useState(search.price);
 
   useEffect(() => {
     const filters: IFilters = {
+      query,
       minPrice: priceRange[0],
       maxPrice: priceRange[1],
       theme,
       tier,
+      time,
+      price,
     };
     onFilterChange(filters);
-  }, [priceRange, theme, tier, onFilterChange]);
+  }, [priceRange, theme, tier, time, price, query, onFilterChange]);
 
   return (
     <div className="filters">
-      <h3>Filters</h3>
-      <div>
-        <label>Price (ETH)</label>
+      <Input
+        placeholder="Quick search"
+        prefix={<Icon component={SearchIcon} />}
+        onChange={(event) => setQuery(event.target.value)}
+      />
+
+      <div className={styles.filterItem}>
+        <label>Price</label>
         <Slider
           range
           min={0.01}
@@ -43,34 +90,77 @@ const FiltersComponent: React.FC<FiltersProps> = ({ onFilterChange }) => {
           step={0.01}
           value={priceRange}
           onChange={(value) => setPriceRange(value as [number, number])}
+          tooltip={{ formatter }}
         />
-        <span>{priceRange} ETH</span>
+        <div className={styles.sliderHelperText}>
+          <span>{priceRange[0]} ETH</span>
+          <span>{priceRange[1]} ETH</span>
+        </div>
       </div>
-      <div>
+      <div className={styles.filterItem}>
         <label>Theme</label>
         <Select
+          className={styles.select}
           value={theme}
           onChange={(value) => setTheme(value)}
-          style={{ width: "100%" }}
+          suffixIcon={<Icon component={DownIcon} />}
         >
           {ThemeOptions.map((opt) => {
             return <Option value={opt}>{opt}</Option>;
           })}
         </Select>
       </div>
-      <div>
+      <div className={styles.filterItem}>
         <label>Tier</label>
         <Select
+          className={styles.select}
           value={tier}
           onChange={(value) => setTier(value || "")}
-          style={{ width: "100%" }}
+          suffixIcon={<Icon component={DownIcon} />}
         >
           {TierOptions.map((opt) => {
             return <Option value={opt}>{opt}</Option>;
           })}
         </Select>
       </div>
+      <div className={styles.filterItem}>
+        <label>Time</label>
+        <Select
+          labelRender={({ value }) => (value === -1 ? "Latest" : "Oldest")}
+          className={styles.select}
+          value={time}
+          onChange={(value) => setTime(value)}
+          suffixIcon={<Icon component={DownIcon} />}
+        >
+          {TimeOptions.map((opt) => {
+            return (
+              <Option value={opt}>{opt === -1 ? "Latest" : "Oldest"}</Option>
+            );
+          })}
+        </Select>
+      </div>
+      <div className={styles.filterItem}>
+        <label>Price</label>
+        <Select
+          labelRender={({ value }) =>
+            value === 1 ? "Low to high" : "High to low"
+          }
+          className={styles.select}
+          value={price}
+          onChange={(value) => setPrice(value)}
+          suffixIcon={<Icon component={DownIcon} />}
+        >
+          {PriceOptions.map((opt) => {
+            return (
+              <Option value={opt}>
+                {opt === 1 ? "Low to high" : "High to low"}
+              </Option>
+            );
+          })}
+        </Select>
+      </div>
       <Button
+        className={styles.filterSubmitButton}
         type="primary"
         onClick={() => {
           setPriceRange([0.01, 200]);

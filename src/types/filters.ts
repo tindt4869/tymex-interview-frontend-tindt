@@ -1,12 +1,13 @@
 import { Theme, Tier } from "./product";
 
-export type FilterTime = string;
-
 export interface IFilters {
   query?: string;
   minPrice?: number;
   maxPrice?: number;
   theme?: Theme;
   tier?: Tier;
-  time?: FilterTime;
+  time?: -1 | 1;
+  price: -1 | 1;
+  page?: number;
+  limit?: number;
 }
