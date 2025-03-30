@@ -1,24 +1,31 @@
 import React from "react";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { useSearch, useNavigate } from "@tanstack/react-router";
-import { Row, Col, Spin, Button, Space, Flex } from "antd";
-import { LoadingOutlined } from "@ant-design/icons";
+import { fetchProducts } from "../api/productApi";
+import { Row, Col, Button, Space, Flex } from "antd";
 import Filters from "../components/Filters";
 import ProductList from "../components/ProductList";
-import { fetchProducts } from "../api/productApi";
+import ProductListError from "../components/ProductListError";
+import ProductListPending from "../components/ProductListPending";
 import { IFilters } from "../types";
 
 const Marketplace: React.FC = () => {
   const search = useSearch({ from: "/" }) as IFilters;
   const navigate = useNavigate({ from: "/" });
 
-  const { data, isLoading, isFetchingNextPage, fetchNextPage, hasNextPage } =
-    useInfiniteQuery({
-      queryKey: ["products", search],
-      queryFn: ({ pageParam }) => fetchProducts({ ...search, page: pageParam }),
-      initialPageParam: 0,
-      getNextPageParam: (lastPage) => lastPage.nextPage,
-    });
+  const {
+    data,
+    status,
+    error,
+    isFetchingNextPage,
+    fetchNextPage,
+    hasNextPage,
+  } = useInfiniteQuery({
+    queryKey: ["products", search],
+    queryFn: ({ pageParam }) => fetchProducts({ ...search, page: pageParam }),
+    initialPageParam: 0,
+    getNextPageParam: (lastPage) => lastPage.nextPage,
+  });
 
   const handleFilterChange = (filters: IFilters) => {
     navigate({
@@ -33,16 +40,10 @@ const Marketplace: React.FC = () => {
           <Filters onFilterChange={handleFilterChange} />
         </Col>
         <Col xs={24} md={18}>
-          {isLoading ? (
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                color: "white",
-              }}
-            >
-              <Spin size="large" indicator={<LoadingOutlined spin />} />
-            </div>
+          {status === "pending" ? (
+            <ProductListPending />
+          ) : status === "error" ? (
+            <ProductListError message={error.message} />
           ) : (
             <>
               <Space direction="vertical" size={16}>
